@@ -28,8 +28,6 @@
 	購買數量:<input type="number" name="number02"><br>
 	<input type="checkbox" name="fruit" id="fruit03" value="香蕉(5台斤)">香蕉(5台斤) 749元;
 	購買數量:<input type="number" name="number03"><br>
-	<input type="checkbox" name="fruit" id="fruit04" value="棗子(4公斤)">棗子(4公斤) 330元;
-	購買數量:<input type="number" name="number04"><br>
 </form>
 
 <button onclick="shoppingInfo()"><h4>結帳</h4></button>
@@ -48,8 +46,6 @@
    let fruit01 = new fruit("芭樂(1箱)", 475, 0);
    let fruit02 = new fruit("蘋果(6台斤)", 435, 0);
    let fruit03 = new fruit("香蕉(5台斤)", 749, 0);
-   let fruit04 = new fruit("棗子(4公斤)", 330, 0);
-
    function shoppingInfo() {
        let x = document.getElementById("form01");
        let item = "";
@@ -65,7 +61,7 @@
             }
             text += item + x.elements[i].value + "<br>";
        }
-        for (i = 5; i <= 11; i+=2){
+        for (i = 5; i <= 9; i++){
             if (x.elements[i].checked === true){
                 switch (i) {
                   case 5: fruit01.No = x.elements[i+1].value;
@@ -79,10 +75,6 @@
                   case 9: fruit03.No = x.elements[i+1].value;
                       sumToPay += fruit03.Price * fruit03.No;
                       fruit03.subTotal();
-                      break;
-                  case 11: fruit04.No = x.elements[i+2].value;
-                      sumToPay += fruit04.Price * fruit04.No;
-                      fruit04.subTotal();
                       break;
                 }
            }
