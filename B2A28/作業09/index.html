@@ -40,7 +40,7 @@
           this.No = no;
           this subTotal = function(no){
             text +="水果種類:" + this.Type  + "; 共" + this.No + "單位<br>";
-            text +="價格小計:" + (this.Price  * this.No) + "元<br>";
+            text +="價格小計:" + this.Price  * this.No + "元<br>";
           };
         };
         var fruit01 = new fruit("愛文芒果(一箱)",475, 0);
@@ -48,33 +48,33 @@
         var fruit03 = new fruit("黑鑽石桑葚(5台斤)",749, 0);
 
     function shoppingInfo() {
-	    const x =document.getElementById("form01");
+	    var x =document.getElementById("form01");
 	    var item = "";
 	    var sumToPay = 0;
 	    var i;
 	    for (i=0; i<5; i++){
 	        switch (i)  {
 	            case 0: item = "姓名："; break;
-	            case 1: item = "收件地址：" break;
+	            case 1: item = "收件地址：";break;
 	            case 2: item = "電話："; break;
 	            case 3: item = "電子郵件："; break;
 	            case 4: item = "指定送貨日期："; break;
 	        }
 	        text += item + x.elements[i].value + "<br>";
 	    }
-	    for (i=5; i<10; i++){
+	    for (i=5; i<=9; i++){
 	        if (x.elements[i].checked === true){
 	            switch (i) {
 	              case 5: fruit01.No = x.elements[i+1].value;
-	                sumToPay += fruit01.Price *  fruit01.No;
+	                sumToPay += fruit01.Price * fruit01.No;
 	                fruit01.subTotal(fruit01.No);
 	                break;
 	                case 7: fruit02.No = x.elements[i+1].value;
-	                sumToPay += fruit02.Price *  fruit02.No;
+	                sumToPay += fruit02.Price * fruit02.No;
 	                fruit02.subTotal(fruit02.No);
                     break;
 	                case 9: fruit03.No = x.elements[i+1].value;
-	                sumToPay += fruit03.Price *  fruit03.No;
+	                sumToPay += fruit03.Price * fruit03.No;
 	                fruit03.subTotal(fruit03.No);
                     break;
 	            }
