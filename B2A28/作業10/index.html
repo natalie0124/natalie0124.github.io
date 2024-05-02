@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>作業10</title>
+	<style>
+		h4 {
+            color: #FF6347;
+            font-family: 'Arial', sans-serif;
+        }
+        h3 {
+            color: #FF6347;
+            font-family: 'Arial', sans-serif;
+        }
+
+        label {
+            color: #4169E1;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+        }
+        input {
+            color: purple;
+            font-family: 'Arial', sans-serif;
+        }
+        div {
+            color: #4169E1;
+            margin: 5px;
+            font-family: 'Arial', sans-serif;
+        }
+        table {
+            border-color: light gray;
+            border-style: solid;
+            border-collapse: collapse;
+            font-family: 'Arial', sans-serif;
+        }
+        td:nth-child(1) {
+            text-align: left;
+            color: #8B4513;
+            border-style: solid;
+            border-color: black;
+            padding: 5px;
+        }
+        td:nth-child(2) {
+            text-align: left;
+            color: #4169E1;
+            border-style: solid;
+            border-color: black;
+            padding: 5px;
+        }
+        td:nth-child(3) {
+            text-align: left;
+            color: #4169E1;
+            border-style: solid;
+            border-color: black;
+            padding: 5px;
+        }
+	</style>
+</head>
+<body>
+<form id="form01">
+	<label for="name01">姓名：</label><input type="text" id="name01" name="name01" value="吳依庭"><br>
+	<label for="address01">收件地址：</label><input type="text" id="address01" name="address01" value="台北市北投區石牌路一段47弄7號"><br>
+	<label for="tel01">電話：</label><input type="tel" id="tel01" name="tel01" value="0922490790"><br>
+	<label for="email01">電子郵件：</label><input type="email" id="email01" name="email01" value="natalie61327@gmail.com"><br>
+	<label for="date01">指定送貨日期：</label><input type="date" id="date01" name="date01"><br>
+	<label>水果種類：</label><br>
+	<input type="checkbox" name="fruit" id="fruit01" value="芭樂5公斤">
+	<label for="fruit01">芭樂5公斤 500元；</label>
+	購買數量：<input type="number" id="number01" name="number01"><br>
+	<input type="checkbox" name="fruit" id="fruit02" value="蘋果5台斤">
+	<label for="fruit02">蘋果5台斤 450元；</label>
+	購買數量：<input type="number" id="number02" name="number02"><br>
+	<input type="checkbox" name="fruit" id="fruit03" value="香蕉3公斤">
+	<label for="fruit03">香蕉3公斤 330元；</label>
+	購買數量：<input type="number" id="number03" name="number03"><br>
+	<input type="checkbox" name="fruit" id="fruit04" value="水梨5公斤">
+	<label for="fruit04">水梨5公斤 600元；</label>
+	購買數量：<input type="number" id="number04" name="number04"><br>
+</form>
+
+<br>
+<button onclick="shoppingInfo()"><h4>確認修正</h4></button>
+<div id="demo"></div>
+<script>
+	let text = "";
+
+	const fruits = [
+	  { type: "芭樂5公斤", price: 500 },
+	  { type: "蘋果5台斤", price: 450 },
+	  { type: "香蕉3公斤", price: 330 },
+	  { type: "水梨5公斤", price: 600 }
+	];
+
+	function shoppingInfo() {
+	  // 清空之前的內容
+	  text = "";
+	  document.getElementById("demo").innerHTML = "";
+
+	  text = "<h4>您的購物資訊如下:</h4>";
+	  text += "<table>";
+
+	  const form = document.getElementById("form01");
+	  let sumToPay = 0;
+
+	  // 顯示基本資訊
+	  for (let i = 0; i < 5; i++) {
+	    text += "<tr>";
+	    let item = "";
+	    switch (i) {
+	      case 0:
+	        item = "姓名: ";
+	        break;
+	      case 1:
+	        item = "收件地址: ";
+	        break;
+	      case 2:
+	        item = "電話: ";
+	        break;
+	      case 3:
+	        item = "電子郵件: ";
+	        break;
+	      case 4:
+	        item = "指定送貨日期: ";
+	        break;
+	    }
+	    text += `<td>${item}</td><td>${form.elements[i].value}</td><td></td>`;
+	    text += "</tr>";
+	  }
+
+	  // 顯示購買項目及價格小計
+	  fruits.forEach((fruit, index) => {
+	    const fruitCheckbox = document.getElementById(`fruit0${index + 1}`);
+	    const fruitQuantity = document.getElementById(`number0${index + 1}`).value;
+	    if (fruitCheckbox.checked) {
+	      const subTotal = fruit.price * fruitQuantity;
+	      sumToPay += subTotal;
+	      text += `<tr><td>水果種類:</td><td>${fruit.type}</td><td>${fruitQuantity} 單位</td></tr>`;
+	      text += `<tr><td>價格小計:</td><td>${subTotal} 元</td><td></td></tr>`;
+	    }
+	  });
+
+	  // 顯示總價格
+	  text += `<tr><td><h3>價格合計:</h3></td><td>${sumToPay} 元</td><td></td></tr>`;
+	  text += "</table>";
+	  document.getElementById("demo").innerHTML = text;
+	}
+</script>
+</body>
+</html>
